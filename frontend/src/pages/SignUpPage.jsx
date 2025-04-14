@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../store/authUser';
 
 const SignUpPage = () => {
-  const [email, setEmail] = useState("");
+  const {searchParams}= new URL(document.location)
+  const emailValue=searchParams.get("email");
+  const [email, setEmail] = useState(emailValue||"");
   const [username, setusername] = useState("");
-  const [pw, setpw] = useState("");
+  const [password, setpassword] = useState("");
 
+  const {signup}=useAuthStore();
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(email, username, pw);
+    signup({email, username, password});
   };
 
   return (
     <div className='h-screen w-full hero-bg'>
       <header className='max-w-6xl mx-auto flex items-center justify-between p-4'>
         <Link to={"/"}>
-          <img src="/netflix-logo.png" alt="logo" className='w-52' />
+        <img src="/netflix-logo.png" alt="logo" className="w-40 max-h-16 object-contain" />
+
         </Link>
       </header>
 
@@ -51,14 +56,14 @@ const SignUpPage = () => {
             </div>
 
             <div>
-              <label htmlFor="pw" className='text-sm font-medium text-gray-300 block'>Password</label>
+              <label htmlFor="password" className='text-sm font-medium text-gray-300 block'>Password</label>
               <input
                 type="password"
                 className="w-full px-3 py-2 mt-1 border border-gray-700 rounded-md bg-transparent text-white focus:outline-none focus:ring"
                 placeholder='.......'
-                id='pw'
-                value={pw}
-                onChange={(e) => setpw(e.target.value)}
+                id='password'
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
               />
             </div>
 

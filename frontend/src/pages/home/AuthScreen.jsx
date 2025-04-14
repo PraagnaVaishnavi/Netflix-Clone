@@ -136,7 +136,7 @@ const AuthScreen = () => {
               '
 							playsInline
 							autoPlay={true}
-					  
+					    muted
 							loop
 						>
 							<source src='/video-devices.m4v' type='video/mp4' />
